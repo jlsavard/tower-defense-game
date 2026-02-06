@@ -104,6 +104,6 @@ wss.on('connection', (ws: WebSocket) => {
   });
 });
 
-httpServer.listen(PORT, () => {
-  log(`Server listening on http://localhost:${PORT}`);
+httpServer.listen(PORT, '0.0.0.0', () => {
+  log(`Server listening on http://0.0.0.0:${PORT}`);
 });
