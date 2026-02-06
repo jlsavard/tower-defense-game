@@ -9,29 +9,37 @@ interface WaveEntry {
   interval: number; // seconds between spawns
 }
 
+// Target duration in seconds for the spawn phase of each wave
+const WAVE_SPAWN_DURATION = 45;
+
 function getWaveDefinition(waveNumber: number): WaveEntry[] {
-  const entries: WaveEntry[] = [];
+  const entries: { type: EnemyType; count: number }[] = [];
   const base = waveNumber;
 
-  // Basic enemies every wave (10x count, tighter spawn intervals)
-  entries.push({ type: EnemyType.BASIC, count: (4 + base * 2) * 10, interval: 0.08 });
+  // Basic enemies every wave
+  entries.push({ type: EnemyType.BASIC, count: (4 + base * 2) * 10 });
 
   // Fast enemies from wave 3
   if (waveNumber >= 3) {
-    entries.push({ type: EnemyType.FAST, count: (2 + base) * 10, interval: 0.06 });
+    entries.push({ type: EnemyType.FAST, count: (2 + base) * 10 });
   }
 
   // Tanks from wave 5
   if (waveNumber >= 5) {
-    entries.push({ type: EnemyType.TANK, count: Math.floor(base / 2) * 10, interval: 0.2 });
+    entries.push({ type: EnemyType.TANK, count: Math.floor(base / 2) * 10 });
   }
 
   // Boss every 10 waves
   if (waveNumber > 0 && waveNumber % 10 === 0) {
-    entries.push({ type: EnemyType.BOSS, count: 10, interval: 0.5 });
+    entries.push({ type: EnemyType.BOSS, count: 10 });
   }
 
-  return entries;
+  // Calculate total enemies, then derive a uniform interval
+  // so spawning is spread evenly across WAVE_SPAWN_DURATION
+  const totalEnemies = entries.reduce((sum, e) => sum + e.count, 0);
+  const interval = Math.max(0.05, WAVE_SPAWN_DURATION / totalEnemies);
+
+  return entries.map(e => ({ ...e, interval }));
 }
 
 export class WaveSystem {
