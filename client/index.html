@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tower Defense</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <canvas id="game-canvas"></canvas>
+    <div id="hud">
+      <div id="hud-left" class="hud-panel"></div>
+      <div id="hud-center" class="hud-panel"></div>
+      <div id="hud-right" class="hud-panel"></div>
+    </div>
+    <div id="tower-bar"></div>
+    <div id="overlay" class="hidden">
+      <div id="overlay-content"></div>
+    </div>
+  </div>
+  <script type="module" src="bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #007BE5;
+  color: #fff;
+  font-family: 'DM Mono', 'Courier New', monospace;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#game-canvas {
+  display: block;
+  cursor: crosshair;
+}
+
+/* HUD bar across top */
+#hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  z-index: 10;
+  font-size: 14px;
+}
+
+.hud-panel {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Tower selection bar at bottom */
+#tower-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  border-radius: 12px 12px 0 0;
+  z-index: 10;
+}
+
+.tower-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  color: #fff;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.tower-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.tower-btn.selected {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: #fff;
+}
+
+.tower-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tower-btn .cost {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.tower-btn .art {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Action buttons in tower bar */
+.action-btn {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  color: #fff;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.action-btn.ready-btn {
+  background: rgba(0, 200, 80, 0.3);
+  border-color: rgba(0, 200, 80, 0.5);
+}
+
+.action-btn.ready-btn:hover {
+  background: rgba(0, 200, 80, 0.5);
+}
+
+/* Overlay for waiting/game over screens */
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(6px);
+}
+
+#overlay.hidden {
+  display: none;
+}
+
+#overlay-content {
+  text-align: center;
+  font-size: 18px;
+  line-height: 2;
+}
+
+#overlay-content .big {
+  font-size: 32px;
+  font-weight: 500;
+}
